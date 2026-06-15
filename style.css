@@ -1,0 +1,1048 @@
+/* Custom Properties & Reset */
+:root {
+    --bg-color: #050508;
+    --card-bg: #0c0c10;
+    --border-color: rgba(255, 255, 255, 0.06);
+    --accent-red: #ff1f3b; /* Diet Coke Red */
+    
+    /* Slide 2 Specific brand red (Deeper Crimson) */
+    --slide-2-bg: #801014; 
+    
+    /* Monochromatic Coca-Cola reddish-brown palette for last slides */
+    --coke-brown-deep: #1d090a;
+    --coke-brown-medium: #2d0e10;
+    --coke-brown-light: #481b1d;
+    --coke-border: rgba(255, 255, 255, 0.08);
+    
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0b0;
+    --text-muted: #525266;
+    
+    --font-heading: 'Times New Roman', Times, serif;
+    --font-body: 'Times New Roman', Times, serif;
+    
+    --transition-fast: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition-smooth: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #050508;
+}
+::-webkit-scrollbar-thumb {
+    background: #1a1a2e;
+    border-radius: 4px;
+    border: 2px solid #050508;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-red);
+}
+
+/* Loading Overlay */
+.loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #050508;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+}
+
+.loader-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 300px;
+    width: 100%;
+}
+
+.loader-logo {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.2rem;
+    margin-bottom: 2rem;
+}
+
+.loader-logo .diet-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2.2rem;
+    color: #ffffff;
+    text-transform: lowercase;
+}
+
+.loader-logo .coke-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    color: var(--accent-red);
+    line-height: 0.5;
+}
+
+.loader-spinner-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1.5rem;
+}
+
+.loader-svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.loader-track {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.03);
+    stroke-width: 4;
+}
+
+.loader-progress {
+    fill: none;
+    stroke: var(--accent-red);
+    stroke-width: 4;
+    stroke-dasharray: 283;
+    stroke-dashoffset: 283;
+    transition: stroke-dashoffset 0.1s ease;
+}
+
+.loader-percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+}
+
+.loader-status {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.loader-bar-outer {
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1px;
+    overflow: hidden;
+}
+
+.loader-bar-inner {
+    width: 0%;
+    height: 100%;
+    background: var(--accent-red);
+    transition: width 0.1s ease;
+}
+
+/* Scroll Animation Section (Slide 1) */
+.scroll-container {
+    height: 380vh; /* Canvas scrolling depth */
+    position: relative;
+    background-color: #000000;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Centered Logo Intro Overlay */
+.logo-hero-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-hero-container.fade-in-ready {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.0);
+}
+
+.logo-hero {
+    display: flex;
+    align-items: baseline;
+    gap: 0.3rem;
+}
+
+.logo-hero .diet-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 5.5rem;
+    color: #ffffff;
+    text-transform: lowercase;
+    line-height: 1;
+}
+
+.logo-hero .coke-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 9rem;
+    color: var(--accent-red);
+    line-height: 0.5;
+    margin-left: -0.6rem;
+}
+
+.scroll-prompt {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-top: 2rem;
+    letter-spacing: 0.05em;
+    animation: bouncePrompt 2s infinite ease-in-out;
+}
+
+#animation-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+/* --- Slide Sections Framework --- */
+.slide-section {
+    height: 150vh; /* Scroll volume to control transition speed */
+    position: relative;
+    background-color: transparent;
+}
+
+.slide-sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 2rem;
+    perspective: 1600px;
+    transform-style: preserve-3d;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+/* Stack sections naturally without z-index exit fades */
+.performance-section { z-index: 11; }
+.legacy-section { z-index: 12; }
+.specs-section { z-index: 13; }
+.pulse-section { z-index: 14; }
+
+/* Slide 2: Peak Performance Container (Deeper Crimson Theme) */
+.performance-section .slide-sticky-wrapper {
+    background: linear-gradient(rgba(18, 2, 3, 0.46), rgba(18, 2, 3, 0.54)), 
+                url('./diet_coke_cans_stack.jpg') no-repeat center center / cover;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.25);
+}
+
+.performance-centered-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+/* Centered Text list styling with premium typography */
+.performance-text-col {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transform-style: preserve-3d;
+}
+
+.performance-header {
+    margin-bottom: 2.5rem;
+    transform: translateX(calc((1 - var(--entry-progress)) * -180px));
+    opacity: var(--entry-progress);
+    will-change: transform, opacity;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.performance-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-style: italic;
+    font-size: 4.2rem;
+    letter-spacing: -0.01em;
+    color: #ffffff; /* High Legibility White */
+    margin-bottom: 0.5rem;
+    text-transform: none; /* Keep natural case for elegant cursive italic mix */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+
+.cursive-accent {
+    font-family: 'Pinyon Script', cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 4.8rem;
+    color: var(--accent-red); /* Diet Coke Red */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+    margin-left: 0.4rem;
+}
+
+.performance-desc-wrapper {
+    border-left: none; /* Centered layout doesn't need left border */
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.performance-desc {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.35rem;
+    line-height: 1.7;
+    max-width: 650px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+/* Staggered lists sliding up in place */
+.performance-staggered-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    width: 100%;
+    max-width: 650px;
+    transform-style: preserve-3d;
+}
+
+.perf-list-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    padding-bottom: 1rem;
+    will-change: transform, opacity;
+}
+
+.perf-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.perf-item-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 1.80rem;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.perf-item-desc {
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-left: 0;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* Staggered horizontal translations (slide in from right) */
+.item-workout {
+    transform: translateX(calc((1 - var(--entry-progress)) * 120px));
+    opacity: var(--entry-progress);
+}
+.item-drive {
+    transform: translateX(calc((1 - var(--entry-progress)) * 180px));
+    opacity: var(--entry-progress);
+}
+.item-nightlife {
+    transform: translateX(calc((1 - var(--entry-progress)) * 240px));
+    opacity: var(--entry-progress);
+}
+.item-compromise {
+    transform: translateX(calc((1 - var(--entry-progress)) * 300px));
+    opacity: var(--entry-progress);
+}
+
+/* Tag buttons styled to pop out as clean white pills on red */
+.perf-tag {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    padding: 0.2rem 0.75rem;
+    border-radius: 4px;
+    transition: var(--transition-fast);
+}
+
+.perf-tag.label-tag {
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    color: var(--slide-2-bg);
+}
+
+.perf-list-item:hover .perf-tag.label-tag {
+    background: transparent;
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Slide 3: Legacy of Crisp Section (Bubbly Coca-Cola Fluid Background) */
+.legacy-section {
+    overflow: hidden;
+}
+
+.legacy-bg-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Sits behind the text */
+    /* Vibrant cherry-red/burgundy overlay blended over bubbly Coca-Cola image background */
+    background: linear-gradient(rgba(128, 16, 20, 0.46), rgba(64, 8, 10, 0.58)), 
+                url('./coca_cola_bubbly.png') no-repeat center center / cover;
+    /* Zooms out and settles on scroll */
+    transform: scale(calc(1.15 - var(--entry-progress) * 0.15));
+    opacity: var(--entry-progress);
+    will-change: transform, opacity;
+}
+
+.legacy-section .slide-sticky-wrapper {
+    background: transparent;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.legacy-container {
+    width: 100%;
+    max-width: 800px; /* Restrict width for single-column readability */
+    height: 100%; /* Fill container height to enable full vertical centering */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 2rem;
+    perspective: 1500px;
+    transform-style: preserve-3d;
+    position: relative;
+    z-index: 2; /* Sit on top of background image */
+    padding-top: 6vh; /* Drag text down slightly below the geometric center */
+}
+
+.legacy-left {
+    transform: translateY(calc((1 - var(--entry-progress)) * 80px));
+    opacity: var(--entry-progress);
+    transform-style: preserve-3d;
+    width: 100%;
+}
+
+.legacy-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 3.5rem;
+    letter-spacing: 0.02em;
+    color: #ffffff; /* White title */
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.8rem;
+}
+
+.legacy-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--accent-red);
+}
+
+.legacy-right {
+    transform: translateY(calc((1 - var(--entry-progress)) * 120px));
+    opacity: var(--entry-progress);
+    transform-style: preserve-3d;
+    width: 100%;
+}
+
+.legacy-text {
+    color: #f0f0f5; /* Off-white for high legibility */
+    font-size: 1.35rem;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Slide 4: Specifications Section (Deep Monochromatic Coca-Cola Reddish-Brown) */
+.specs-section .slide-sticky-wrapper {
+    background-color: var(--coke-brown-deep);
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.specs-container-3d {
+    width: 100%;
+    max-width: 1200px;
+    transform-style: preserve-3d;
+}
+
+.specs-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    transform: translateY(calc((1 - var(--entry-progress)) * -50px));
+    opacity: var(--entry-progress);
+    will-change: transform, opacity;
+}
+
+.specs-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 3.2rem;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    margin-bottom: 0.2rem;
+}
+
+.specs-subtitle {
+    font-family: var(--font-heading);
+    font-size: 0.95rem;
+    color: var(--accent-red);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 2rem;
+    transform-style: preserve-3d;
+}
+
+.spec-card {
+    background-color: var(--coke-brown-light);
+    border: 1px solid var(--coke-border);
+    padding: 3rem 2.2rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    will-change: transform, opacity;
+}
+
+.spec-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255, 31, 59, 0.06);
+}
+
+.spec-icon {
+    display: inline-block;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+    animation: floatIcon 4s ease-in-out infinite;
+}
+
+/* Staggered Assemblage from Corners */
+.spec-card-1 {
+    transform: translate(calc((1 - var(--card-1-progress)) * -120px), calc((1 - var(--card-1-progress)) * -120px)) 
+               rotate(calc((1 - var(--card-1-progress)) * -15deg));
+    opacity: var(--card-1-progress);
+}
+.spec-card-2 {
+    transform: translate(calc((1 - var(--card-2-progress)) * 120px), calc((1 - var(--card-2-progress)) * -120px)) 
+               rotate(calc((1 - var(--card-2-progress)) * 15deg));
+    opacity: var(--card-2-progress);
+}
+.spec-card-3 {
+    transform: translate(calc((1 - var(--card-3-progress)) * -120px), calc((1 - var(--card-3-progress)) * 120px)) 
+               rotate(calc((1 - var(--card-3-progress)) * -15deg));
+    opacity: var(--card-3-progress);
+}
+.spec-card-4 {
+    transform: translate(calc((1 - var(--card-4-progress)) * 120px), calc((1 - var(--card-4-progress)) * 120px)) 
+               rotate(calc((1 - var(--card-4-progress)) * 15deg));
+    opacity: var(--card-4-progress);
+}
+
+/* Offset float animations */
+.specs-grid .spec-card:nth-child(1) .spec-icon { animation-delay: 0s; }
+.specs-grid .spec-card:nth-child(2) .spec-icon { animation-delay: 0.8s; }
+.specs-grid .spec-card:nth-child(3) .spec-icon { animation-delay: 1.6s; }
+.specs-grid .spec-card:nth-child(4) .spec-icon { animation-delay: 2.4s; }
+
+.spec-card-title {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+}
+
+.spec-card-desc {
+    color: #f0f0f5;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Slide 5: Find Your Pulse Section & Footer (Warm Reddish-Brown Monochromatic) */
+.pulse-section .slide-sticky-wrapper {
+    background: linear-gradient(180deg, var(--coke-brown-deep) 0%, #110405 100%);
+    justify-content: space-between;
+    padding-bottom: 0;
+    box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.pulse-container-3d {
+    width: 100%;
+    margin: auto 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(calc(0.85 + var(--entry-progress) * 0.15)) translateY(calc((1 - var(--entry-progress)) * 40px));
+    opacity: var(--entry-progress);
+    will-change: transform, opacity;
+}
+
+.pulse-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1.2rem;
+    animation: floatIcon 3.5s ease-in-out infinite;
+}
+
+.pulse-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 3.2rem;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    margin-bottom: 0.8rem;
+}
+
+.pulse-subtitle {
+    color: #d8d8e0;
+    font-size: 1.15rem;
+    max-width: 500px;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.pulse-search-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    transition: var(--transition-fast);
+}
+
+.pulse-search-input {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    padding: 1.1rem 4rem 1.1rem 1.8rem;
+    border-radius: 35px;
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.pulse-search-input::placeholder {
+    color: #a0a0b0;
+}
+
+.pulse-search-input:focus {
+    border-color: var(--accent-red);
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 31, 59, 0.12);
+}
+
+.pulse-search-btn {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: #a0a0b0;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: var(--transition-fast);
+}
+
+.pulse-search-btn:hover {
+    color: var(--accent-red);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-50%) scale(1.1) rotate(5deg);
+}
+
+/* Light/Silver Styled Footer elements on dark warm brown background */
+.diet-footer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem 0 3rem 0;
+    transform: translateY(calc((1 - var(--entry-progress)) * 40px));
+    opacity: var(--entry-progress);
+    will-change: transform, opacity;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+}
+
+.footer-brand .diet-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: #ffffff;
+    text-transform: lowercase;
+}
+
+.footer-brand .coke-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.1rem;
+    color: var(--accent-red);
+    line-height: 0.5;
+}
+
+.footer-copy {
+    font-size: 0.8rem;
+    color: #a0a0b0;
+}
+
+.footer-right {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.footer-link {
+    color: #a0a0b0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: var(--transition-fast);
+}
+
+.footer-link:hover {
+    color: var(--accent-red);
+    border-bottom-color: var(--accent-red);
+}
+
+/* Keyframes */
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes bouncePrompt {
+    0%, 100% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(6px); opacity: 0.95; }
+}
+
+@keyframes bounceArrow {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-7px); }
+}
+
+@keyframes floatCan {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+}
+
+/* 3D Levitating and Rocking (Tumble) loop - keeps the 2D image looking solid and volumetric without flat Y flips */
+@keyframes levitateAndTumble {
+    0%, 100% {
+        transform: translateY(0) rotate(18deg) rotateY(-28deg) rotateX(-8deg);
+    }
+    50% {
+        transform: translateY(-16px) rotate(18deg) rotateY(28deg) rotateX(8deg);
+    }
+}
+
+@media(max-width: 900px) {
+    .logo-hero .diet-text {
+        font-size: 3.5rem;
+    }
+    
+    .logo-hero .coke-text {
+        font-size: 6rem;
+    }
+    
+    .performance-title {
+        font-size: 2.5rem;
+    }
+    
+    .cursive-accent {
+        font-size: 2.8rem;
+    }
+    
+    .performance-desc {
+        font-size: 1.15rem;
+    }
+    
+    .performance-text-col {
+        width: 100%;
+    }
+    
+    .performance-staggered-list {
+        gap: 1.2rem;
+    }
+    
+    .perf-list-item {
+        padding-bottom: 0.6rem;
+    }
+    
+    .perf-item-title {
+        font-size: 1.4rem;
+    }
+    
+    .slide-section {
+        height: 120vh; /* Shorter scroll depth on mobile */
+    }
+    
+    .slide-sticky-wrapper {
+        padding: 1.5rem;
+        justify-content: center !important;
+    }
+    
+    .legacy-container {
+        gap: 1.5rem;
+    }
+    
+    .footer-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-left {
+        align-items: center;
+    }
+    
+    .footer-right {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.2rem;
+    }
+}
+
+/* Header Navigation Styling */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Sit on top of all sticky sections */
+    background: rgba(18, 2, 3, 0.45);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: var(--transition-fast);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: baseline;
+    gap: 0.2rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.nav-brand .diet-text {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-transform: lowercase;
+}
+
+.nav-brand .coke-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--accent-red);
+    line-height: 0.5;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.2rem;
+    align-items: center;
+}
+
+.nav-link {
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    position: relative;
+    padding: 0.4rem 0;
+    transition: var(--transition-fast);
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Red underline expanding outwards on hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-red);
+    transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+                left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.nav-cta .cta-btn {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: #ffffff;
+    background: var(--accent-red);
+    border: 1px solid var(--accent-red);
+    padding: 0.55rem 1.4rem;
+    border-radius: 4px;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(255, 31, 59, 0.15);
+    transition: var(--transition-fast);
+}
+
+.nav-cta .cta-btn:hover {
+    background: transparent;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 31, 59, 0.5);
+    border-color: #ffffff;
+}
+
+/* Mobile responsive navigation overrides */
+@media(max-width: 900px) {
+    .nav-links, .nav-cta {
+        display: none; /* Collapses navigation menus on small screens */
+    }
+    
+    .nav-container {
+        padding: 0.8rem 1.5rem;
+        justify-content: center; /* Center brand logo on mobile header */
+    }
+}

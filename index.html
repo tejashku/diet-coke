@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIET COKE — Peak Performance</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Oswald:wght@600;700&family=Outfit:wght@700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,600;1,800&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Loading Screen Overlay -->
+    <div id="loader-overlay" class="loader-overlay">
+        <div class="loader-content">
+            <div class="loader-logo">diet Coke</div>
+            <div class="loader-spinner-container">
+                <svg class="loader-svg" viewBox="0 0 100 100">
+                    <circle class="loader-track" cx="50" cy="50" r="45"></circle>
+                    <circle id="loader-progress-circle" class="loader-progress" cx="50" cy="50" r="45"></circle>
+                </svg>
+                <div id="loader-percentage" class="loader-percentage">0%</div>
+            </div>
+            <div id="loader-status" class="loader-status">Preloading cinematic frames...</div>
+            <div class="loader-bar-outer">
+                <div id="loader-bar-inner" class="loader-bar-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header class="main-header">
+        <div class="nav-container">
+            <div class="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <span class="diet-text">diet</span>
+                <span class="coke-text">Coke</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#animation-section" class="nav-link">Home</a>
+                <a href="#performance-section" class="nav-link">Performance</a>
+                <a href="#legacy-section" class="nav-link">Legacy</a>
+                <a href="#specs-section" class="nav-link">Specs</a>
+                <a href="#pulse-section" class="nav-link">Store Locator</a>
+            </nav>
+            <div class="nav-cta">
+                <a href="#pulse-section" class="cta-btn">Buy Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Scroll Animation Section with Logo intro (Slide 1) -->
+        <section id="animation-section" class="scroll-container">
+            <div class="sticky-wrapper">
+                <!-- Centered Brand Logo overlay (Fades out on scroll) -->
+                <div id="logo-hero-container" class="logo-hero-container">
+                    <div class="logo-hero">
+                        <span class="diet-text">diet</span>
+                        <span class="coke-text">Coke</span>
+                    </div>
+                    <div class="scroll-prompt">Scroll to Begin</div>
+                </div>
+                
+                <canvas id="animation-canvas"></canvas>
+            </div>
+        </section>
+
+        <!-- Peak Performance Section (Slide 2: Centered layout with dimmed Cans Background) -->
+        <section id="performance-section" class="slide-section performance-section">
+            <div class="slide-sticky-wrapper">
+                <div class="performance-centered-container">
+                    
+                    <!-- Centered Written Content -->
+                    <div class="performance-text-col">
+                        <div class="performance-header">
+                            <h2 class="performance-title">Peak <span class="cursive-accent">Performance</span></h2>
+                            <div class="performance-desc-wrapper">
+                                <p class="performance-desc">Fuel your ambition. Crisp, bold, and unrelenting. Experience the high-contrast lifestyle where every moment is elevated.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="performance-staggered-list">
+                            <!-- Item 1 -->
+                            <div class="perf-list-item item-workout">
+                                <div class="perf-item-header">
+                                    <span class="perf-tag label-tag">ELEVATE</span>
+                                    <h3 class="perf-item-title">The Workout</h3>
+                                </div>
+                                <p class="perf-item-desc">Push your limits. Every motion refined, every surface reflecting energy in high contrast.</p>
+                            </div>
+                            
+                            <!-- Item 2 -->
+                            <div class="perf-list-item item-drive">
+                                <div class="perf-item-header">
+                                    <span class="perf-tag label-tag">THE DRIVE</span>
+                                    <h3 class="perf-item-title">The Drive</h3>
+                                </div>
+                                <p class="perf-item-desc">Sustained focus, sharp vision, and premium energy for the journey ahead.</p>
+                            </div>
+                            
+                            <!-- Item 3 -->
+                            <div class="perf-list-item item-nightlife">
+                                <div class="perf-item-header">
+                                    <span class="perf-tag label-tag">AFTER HOURS</span>
+                                    <h3 class="perf-item-title">The Nightlife</h3>
+                                </div>
+                                <p class="perf-item-desc">The high-contrast rhythm of the dark. Bold, crisp, and unforgettable.</p>
+                            </div>
+                            
+                            <!-- Item 4 -->
+                            <div class="perf-list-item item-compromise">
+                                <div class="perf-item-header">
+                                    <span class="perf-tag label-tag">⚡ ZERO</span>
+                                    <h3 class="perf-item-title">Zero Compromise</h3>
+                                </div>
+                                <p class="perf-item-desc">Maximum taste, zero limits. Built for those who demand more from every drop.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Legacy of Crisp Section (Slide 3: Bubbly Coca-Cola Fluid Background) -->
+        <section id="legacy-section" class="slide-section legacy-section">
+            <div class="slide-sticky-wrapper">
+                <div class="legacy-bg-media"></div>
+                <div class="legacy-container">
+                    <div class="legacy-left">
+                        <h2 class="legacy-title">THE LEGACY OF CRISP</h2>
+                    </div>
+                    <div class="legacy-right">
+                        <p class="legacy-text">Since its inception, Diet Coke has defined the intersection of uncompromising taste and modern energy. Born from a vision of premium refreshment, our legacy is built on the sharp, crisp snap of silver and the bold pulse of red. We don't just provide a beverage; we fuel the high-performance lifestyle of those who refuse to settle for anything less than extraordinary.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Specifications Section (Slide 4: Deep Monochromatic Coca-Cola Reddish-Brown) -->
+        <section id="specs-section" class="slide-section specs-section">
+            <div class="slide-sticky-wrapper">
+                <div class="specs-container-3d">
+                    <div class="specs-header">
+                        <h2 class="specs-title">SPECIFICATIONS</h2>
+                        <span class="specs-subtitle">ENGINEERED FOR EXCELLENCE</span>
+                    </div>
+                    
+                    <div class="specs-grid">
+                        <!-- Spec Card 1 (Assembles from top-left) -->
+                        <div class="spec-card spec-card-1">
+                            <div class="spec-icon">🧪</div>
+                            <h3 class="spec-card-title">FORMULATION</h3>
+                            <p class="spec-card-desc">Premium carbonation meets a proprietary blend of natural flavors for that signature crisp finish.</p>
+                        </div>
+                        <!-- Spec Card 2 (Assembles from top-right) -->
+                        <div class="spec-card spec-card-2">
+                            <div class="spec-icon">📐</div>
+                            <h3 class="spec-card-title">DESIGN</h3>
+                            <p class="spec-card-desc">The iconic silver finish meets an ergonomic can design, optimized for the modern hand and eye.</p>
+                        </div>
+                        <!-- Spec Card 3 (Assembles from bottom-left) -->
+                        <div class="spec-card spec-card-3">
+                            <div class="spec-icon">⚡</div>
+                            <h3 class="spec-card-title">ENERGY</h3>
+                            <p class="spec-card-desc">A precise caffeine blend engineered to provide sustained focus and a clean, sharp mental edge.</p>
+                        </div>
+                        <!-- Spec Card 4 (Assembles from bottom-right) -->
+                        <div class="spec-card spec-card-4">
+                            <div class="spec-icon">🎯</div>
+                            <h3 class="spec-card-title">PURITY</h3>
+                            <p class="spec-card-desc">Zero sugar, zero calories, zero compromise. Pure performance in every single drop.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Find Your Pulse Section (Slide 5: Monochromatic Reddish-Brown Gradient) -->
+        <section id="pulse-section" class="slide-section pulse-section">
+            <div class="slide-sticky-wrapper">
+                <div class="pulse-container-3d">
+                    <div class="pulse-icon">📍</div>
+                    <h2 class="pulse-title">FIND YOUR PULSE</h2>
+                    <p class="pulse-subtitle">Locate the nearest source of uncompromising energy. Available at premium retailers and select venues.</p>
+                    <div class="pulse-search-container">
+                        <input type="text" class="pulse-search-input" placeholder="Enter ZIP or City">
+                        <button class="pulse-search-btn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Reddish-Brown Styled Footer -->
+                <footer class="diet-footer">
+                    <div class="footer-inner">
+                        <div class="footer-left">
+                            <div class="footer-brand">
+                                <span class="diet-text">diet</span>
+                                <span class="coke-text">Coke</span>
+                            </div>
+                            <span class="footer-copy">© 2026 DIET COKE. ALL RIGHTS RESERVED.</span>
+                        </div>
+                        <div class="footer-right">
+                            <a href="#" class="footer-link">Privacy Policy</a>
+                            <a href="#" class="footer-link">Terms of Service</a>
+                            <a href="#" class="footer-link">Contact Us</a>
+                            <a href="#" class="footer-link">Accessibility</a>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <!-- App Script -->
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
